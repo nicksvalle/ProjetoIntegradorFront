@@ -1,0 +1,123 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 130vh;
+}
+
+
+
+.button-exit {
+    background-color: transparent; 
+    border: 2px solid black; 
+    border-radius: 50%; 
+    padding: 0;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+
+    float: right; 
+    margin: 10px; 
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4em;
+    height: 4em;
+
+    cursor: pointer; 
+}
+
+.button-exit svg {
+    width: 70%; 
+    height: auto; 
+    fill: black; 
+}
+
+.exit-text{
+    position: absolute;
+    top: 90px; /* Adiciona espaço entre o botão e o texto */
+    right: 48px;
+    font-family: "Arial", sans-serif; /* Defina a fonte desejada */
+    font-size: 16px; /* Tamanho da fonte do texto */
+    color: black; /* Cor do texto */
+    
+}
+
+
+.icon {
+    position: absolute;
+    top: 30%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 100%;
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px; /* Adiciona espaçamento vertical entre os botões */
+}
+
+.button {
+    display: inline-block;
+    padding: 20px 30px;
+    border: 2px solid #B50001;
+    border-radius: 40px;
+    transition: all 0.2s ease-in;
+    position: relative;
+    overflow: hidden;
+    font-size: 19px;
+    color: black;
+    z-index: 1;
+   }
+   
+   .button:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.25);
+    top: 100%;
+    width: 140%;
+    height: 180%;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    display: block;
+    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+    z-index: -1;
+   }
+   
+   .button:after {
+    content: "";
+    position: absolute;
+    left: 55%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.45);
+    top: 180%;
+    width: 160%;
+    height: 190%;
+    background-color: #B50001;
+    border-radius: 50%;
+    display: block;
+    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+    z-index: -1;
+   }
+   
+   .button:hover {
+    color: #ffffff;
+    border: 2px solid #B50001;
+   }
+   
+   .button:hover:before {
+    top: -35%;
+    background-color: #B50001;
+    transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+   }
+   
+   .button:hover:after {
+    top: -45%;
+    background-color: #B50001;
+    transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+   }
