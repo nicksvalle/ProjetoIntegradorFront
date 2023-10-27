@@ -12,6 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenuCoordenadorComponent } from './menu-coordenador/menu-coordenador.component';
 import { AulaGerenciarComponent } from './aula-gerenciar/aula-gerenciar.component';
 import { CursoGerenciarComponent } from './curso-gerenciar/curso-gerenciar.component';
+import { BotaoLogoComponent } from './botao-logo/botao-logo.component';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { CursoGerenciarComponent } from './curso-gerenciar/curso-gerenciar.compo
     CoordenadorPortalComponent,
     MenuCoordenadorComponent,
     AulaGerenciarComponent,
-    CursoGerenciarComponent
+    CursoGerenciarComponent,
+    BotaoLogoComponent,
+
   ],
   imports: [
     BrowserModule,
