@@ -9,12 +9,18 @@ import { ProfessorGerenciarComponent } from './professor-gerenciar/professor-ger
 import { CoordenadorPortalComponent } from './coordenador-portal/coordenador-portal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MenuCoordenadorComponent } from './menu-coordenador/menu-coordenador.component';
+import { AulaGerenciarComponent } from './aula-gerenciar/aula-gerenciar.component';
+import { CursoGerenciarComponent } from './curso-gerenciar/curso-gerenciar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfessorGerenciarComponent,
-    CoordenadorPortalComponent
+    CoordenadorPortalComponent,
+    MenuCoordenadorComponent,
+    AulaGerenciarComponent,
+    CursoGerenciarComponent
   ],
   imports: [
     BrowserModule,
