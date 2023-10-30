@@ -1,0 +1,36 @@
+{
+  "professor": [
+    {
+      "id": 1,
+      "name": "Nicolas",
+      "email": "nicolas@gmail.com",
+      "course": "DS",
+      "date": "06-06-2005",
+      "materia": "Programação Web"
+    },
+    {
+      "id": 2,
+      "name": "Julia",
+      "email": "julia@gmail.com",
+      "course": "ADM",
+      "date": "26-02-2000",
+      "materia": "Programação Web"
+    },
+    {
+      "id": 3,
+      "name": "",
+      "email": "",
+      "course": "",
+      "date": "",
+      "materia": ""
+    },
+    {
+      "id": 4,
+      "name": "",
+      "email": "",
+      "course": [],
+      "date": "",
+      "materia": "BD"
+    }
+  ]
+}

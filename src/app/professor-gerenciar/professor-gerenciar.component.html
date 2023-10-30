@@ -1,7 +1,5 @@
 <div class="container">
-
   <app-botao-logo></app-botao-logo>
-
   <div class="card w-50 h-50">
     <div class="card-body">
 
@@ -9,41 +7,74 @@
         <h1>Cadastrar Professor</h1>
       </div>
 
-      <form class="row g-3">
-        <div class="col-md-6">
-          <label for="inputEmail4" class="form-label">Nome</label>
-          <input type="email" class="form-control" id="inputEmail4" placeholder="Digite o Nome do Professor...">
+      <form class="row g-3" [formGroup]="formGroupClient">
+        <div class="col-md-9">
+          <label for="name" class="form-label">Nome</label>
+          <input type="tex" class="form-control" id="name" placeholder="Digite o nome completo do Professor...">
         </div>
-        <div class="col-md-6">
-          <label for="inputPassword4" class="form-label">Sobrenome</label>
-          <input type="password" class="form-control" id="inputPassword4" placeholder="Digite o Sobrenome do Professor...">
+
+        <div class="col-9">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="Digite o email do Professor...">
         </div>
-        <div class="col-12">
-          <label for="inputAddress" class="form-label">Email</label>
-          <input type="text" class="form-control" id="inputAddress" placeholder="Digite o Email do Professor...">
-        </div>
+
         <div class="col-6">
-          <label for="inputCalendar" class="form-label">Selecione a data de nascimento</label>
-          <input type="date" class="form-control" id="inputCalendar" placeholder="Clique para selecionar uma data" #inputCalendar>
+          <label for="date" class="form-label">Selecione a data de nascimento</label>
+          <input type="date" class="form-control" id="date" placeholder="Clique para selecionar uma data" #inputCalendar>
         </div>
+
         <div class="col-md-3">
-          <label for="inputCurso" class="form-label">Curso</label>
+          <label for="curso" class="form-label">Curso</label>
           <select id="curso" class="form-select">
             <option selected>Choose...</option>
-            <option>...</option>
+            <option>DS</option>
+            <option>ADM</option>
           </select>
         </div>
+
         <div class="col-md-3">
-          <label for="inputMateria" class="form-label">Matéria</label>
-          <select id="materia" class="form-select">
-            <option selected>Choose...</option>
-            <option>...</option>
+          <label for="materia" class="form-label">Materia</label>
+          <select formControlName="materia" class="form-select" id="materia">
+            <option value="">Selecione uma matéria</option>
+            <option *ngFor="let materia of materias" [value]="materia.sigla">{{ materia.nome }}</option>
           </select>
         </div>
-        <div class="col-12">
-          <button type="submit" class="btn btn-primary">Sign in</button>
+
+        <div class="col-12"  style="margin-top: 50px;">
+          <button type="submit" class="btn btn-danger" (click)="save()">Cadastrar</button>
+          <button type="button" class="btn btn-dark" (click)="clean()">Limpar</button>
         </div>
+
       </form>
     </div>
   </div>
+  
+  <table class="table table-striped" style="margin-top: 100px;">
+    <thead>
+      <tr>
+        <th scope="col">R.M</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Email</th>
+        <th scope="col">Curso</th>
+        <th scope="col">Data de Nascimento</th>
+        <th scope="col">Materia</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let professor of professor">
+        <th scope="row">{{professor.id}}</th>
+        <td>{{professor.name}}</td>
+        <td>{{professor.email}}</td>
+        <td>{{professor.course}}</td>
+        <td>{{professor.date}}</td>
+        <td>{{professor.materia}}</td>
+        <td>
+          <button type="button" class="btn btn-dark me-1" (click)="edit(professor)" >Editar</button>
+          <button type="button" class="btn btn-dark" (click)="delete(professor)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
 </div>

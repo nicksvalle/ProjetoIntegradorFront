@@ -9,7 +9,7 @@
   background-repeat: no-repeat; /* Evita que a imagem de fundo se repita */
 }
 
-.button-exit {
+.button-back {
   background-color: transparent;
   border: 2px solid black;
   border-radius: 50%;
@@ -30,18 +30,19 @@
   cursor: pointer;
 }
 
-.button-exit svg {
+.button-back svg {
   width: 70%;
   height: auto;
   fill: black;
 }
 
-.exit-text{
+.logo {
   position: absolute;
-  top: 110px; /* Adiciona espaço entre o botão e o texto */
-  right: 54px;
-  font-family: "Arial", sans-serif; /* Defina a fonte desejada */
-  font-size: 16px; /* Tamanho da fonte do texto */
-  color: black; /* Cor do texto */
-
+  width: 200px; /* Largura desejada */
+  height: 124px; /* Altura desejada */
+  left: 71px;
+  top: 10px;
+  background: url(img/fatec.png);
+  background-size: contain; /* Ajuste o tamanho da imagem para caber no contêiner */
+  background-repeat: no-repeat; /* Evita que a imagem de fundo se repita */
 }
