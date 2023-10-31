@@ -7,7 +7,7 @@ import { Professor } from './professor';
   providedIn: 'root'
 })
 export class ProfessorGerenciarService {
-  url = 'http://localhost:3000/professor'
+  url = 'http://localhost:8080/professores'
 
   constructor(private http: HttpClient) { }
 

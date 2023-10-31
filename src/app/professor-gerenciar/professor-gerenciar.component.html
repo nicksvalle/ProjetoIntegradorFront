@@ -26,17 +26,16 @@
           </div>
 
           <div class="col-md-3">
-            <label for="curso" class="form-label" formControlName="course">Curso</label>
-            <select id="curso" formControlName="course" class="form-select">
-              <option selected>Choose...</option>
-              <option>DS</option>
-              <option>ADM</option>
+            <label for="course" class="form-label">Curso</label>
+            <select id="course" formControlName="course" class="form-select" (change)="onChangeCurso()">
+              <option value="" selected>Choose...</option>
+              <option *ngFor="let curso of cursos" [value]="curso">{{ curso }}</option>
             </select>
           </div>
 
           <div class="col-md-3">
-            <label for="materia" class="form-label">Materia</label>
-            <select formControlName="materia" class="form-select" id="materia">
+            <label for="materia" class="form-label">Matéria</label>
+            <select id="materia" formControlName="materia" class="form-select">
               <option value="">Selecione uma matéria</option>
               <option *ngFor="let materia of materias" [value]="materia.sigla">{{ materia.nome }}</option>
             </select>
