@@ -28,7 +28,7 @@
           <div class="col-md-3">
             <label for="course" class="form-label">Curso</label>
             <select id="course" formControlName="course" class="form-select" (change)="onChangeCurso()">
-              <option value="" selected>Choose...</option>
+              <option value="" selected disabled>Escolha um curso...</option>
               <option *ngFor="let curso of cursos" [value]="curso">{{ curso }}</option>
             </select>
           </div>
@@ -36,7 +36,7 @@
           <div class="col-md-3">
             <label for="materia" class="form-label">Matéria</label>
             <select id="materia" formControlName="materia" class="form-select">
-              <option value="">Selecione uma matéria</option>
+              <option value="" selected disabled>Selecione uma matéria</option>
               <option *ngFor="let materia of materias" [value]="materia.sigla">{{ materia.nome }}</option>
             </select>
           </div>

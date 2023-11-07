@@ -13,7 +13,7 @@ export class ProfessorGerenciarComponent {
   professor: Professor[] = [];
   isEditing: boolean = false;
   formGroupClient: FormGroup;
-  materias = materias;
+  materias: any[] = [];
   cursos: string[] = ['DS', 'ADM']; // Adicione os cursos necessários
 
   constructor(private professorService: ProfessorGerenciarService, private formBuilder: FormBuilder) {
@@ -27,25 +27,21 @@ export class ProfessorGerenciarComponent {
     });
   }
 
-  onChangeCurso() {
-    const courseControl = this.formGroupClient.get('course');
-    if (courseControl) {
-      const selectedCourse = courseControl.value;
-
-      if (selectedCourse) {
-        // Filtrar as matérias com base no curso selecionado
-        this.materias = materias.filter(materia => materia.curso === selectedCourse);
-      } else {
-        // Se nenhum curso for selecionado, exibir todas as matérias
-        this.materias = materias;
-      }
-    } else {
-      // Lidar com o controle não encontrado, se necessário
-    }
+  ngOnInit(): void {
+    this.onChangeCurso();
+    this.loadProfessor();
   }
 
-  ngOnInit(): void {
-    this.loadProfessor();
+  onChangeCurso() {
+    const selectedCourse = this.formGroupClient.get('course')?.value;
+
+    if (selectedCourse) {
+      // Filtrar as matérias com base no curso selecionado
+      this.materias = materias.filter(materia => materia.curso === selectedCourse);
+    } else {
+      // Se nenhum curso for selecionado, limpar a lista de matérias
+      this.materias = [];
+    }
   }
 
   loadProfessor() {
@@ -69,13 +65,15 @@ export class ProfessorGerenciarComponent {
         }
       )
     }
-    else{
-      this.professorService.save(this.formGroupClient.value).subscribe(
-        {
-          next: data => {
-            this.professor.push(data);
-            this.formGroupClient.reset();
-          }
+    else {
+      this.professorService.save(this.formGroupClient.value).subscribe({
+        next: data => {
+          this.professor.push(data);
+          this.formGroupClient.reset();
+          this.formGroupClient.get('course')?.setValue('');
+          this.formGroupClient.get('materia')?.setValue('');
+          this.onChangeCurso();
+            }
         }
         );
     }
@@ -83,12 +81,21 @@ export class ProfessorGerenciarComponent {
 
   clean(){
     this.formGroupClient.reset();
+    this.formGroupClient.get('course')?.setValue('');
+    this.formGroupClient.get('materia')?.setValue('');
+    this.onChangeCurso();
     this.isEditing = false;
+
   }
 
-  edit(professor : Professor){
-    this.formGroupClient.setValue(professor);
-    this.isEditing = true;
+  edit(professor: Professor) {
+    this.formGroupClient.patchValue(professor); // Atualiza todos os campos com os valores do professor
+
+    // Atualiza a matéria com base no curso do professor
+    const selectedCourse = this.formGroupClient.get('course')?.value;
+    if (selectedCourse) {
+      this.materias = materias.filter(materia => materia.curso === selectedCourse);
+    }
   }
 
   delete(professor : Professor){

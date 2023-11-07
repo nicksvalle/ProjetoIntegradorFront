@@ -13,6 +13,7 @@ import { MenuCoordenadorComponent } from './menu-coordenador/menu-coordenador.co
 import { AulaGerenciarComponent } from './aula-gerenciar/aula-gerenciar.component';
 import { CursoGerenciarComponent } from './curso-gerenciar/curso-gerenciar.component';
 import { BotaoLogoComponent } from './botao-logo/botao-logo.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { BotaoLogoComponent } from './botao-logo/botao-logo.component';
     NgbModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgMultiSelectDropDownModule
   ],
   providers: [],
   bootstrap: [AppComponent]
