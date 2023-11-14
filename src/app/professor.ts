@@ -2,7 +2,7 @@ export interface Professor{
     id : number;
     name : string;
     email : string;
-    course : string;
+    course : string[];
     date: Date;
-    materia : string;
+    materia : string[];
   }

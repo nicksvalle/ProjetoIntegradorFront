@@ -2,7 +2,7 @@
   <app-botao-logo></app-botao-logo>
 
 
-    <div class="card w-50 h-50 ">
+    <div class="card w-50 h-60 ">
       <div class="card-body">
 
         <div class="text-center"> <!-- Centraliza horizontalmente -->
@@ -27,7 +27,7 @@
 
           <div class="col-md-3">
             <label for="course" class="form-label">Curso</label>
-            <select id="course" formControlName="course" class="form-select" (change)="onChangeCurso()">
+            <select id="course" formControlName="course" class="form-select" (change)="onChangeCurso()" multiple>
               <option value="" selected disabled>Escolha um curso...</option>
               <option *ngFor="let curso of cursos" [value]="curso">{{ curso }}</option>
             </select>
@@ -35,7 +35,7 @@
 
           <div class="col-md-3">
             <label for="materia" class="form-label">Matéria</label>
-            <select id="materia" formControlName="materia" class="form-select">
+            <select id="materia" formControlName="materia" class="form-select" multiple>
               <option value="" selected disabled>Selecione uma matéria</option>
               <option *ngFor="let materia of materias" [value]="materia.sigla">{{ materia.nome }}</option>
             </select>

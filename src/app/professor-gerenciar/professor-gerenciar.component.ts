@@ -14,35 +14,34 @@ export class ProfessorGerenciarComponent {
   isEditing: boolean = false;
   formGroupClient: FormGroup;
   materias: any[] = [];
-  cursos: string[] = ['DS', 'ADM']; // Adicione os cursos necessários
+  cursos: string[] = ['DS', 'ADM'];
+  cursosSelecionados: any [] = [];
 
-  constructor(private professorService: ProfessorGerenciarService, private formBuilder: FormBuilder) {
-    this.formGroupClient = formBuilder.group({
-      id: [''],
-      name: [''],
-      email: [''],
-      course: [''],
-      date: [''],
-      materia: ['']
-    });
-  }
+    constructor(private professorService: ProfessorGerenciarService, private formBuilder: FormBuilder) {
+      this.formGroupClient = formBuilder.group({
+        id: [''],
+        name: [''],
+        email: [''],
+        course: [''],
+        date: [''],
+        materia: ['']
+      });
+    }
 
-  ngOnInit(): void {
-    this.onChangeCurso();
-    this.loadProfessor();
-  }
+    ngOnInit(): void {
+      this.onChangeCurso();
+      this.loadProfessor();
+    }
 
   onChangeCurso() {
-    const selectedCourse = this.formGroupClient.get('course')?.value;
-
-    if (selectedCourse) {
-      // Filtrar as matérias com base no curso selecionado
-      this.materias = materias.filter(materia => materia.curso === selectedCourse);
+    const selectedCourses = this.formGroupClient.get('course')?.value;
+    if (selectedCourses && selectedCourses.length > 0) {
+      this.materias = materias.filter(materia => selectedCourses.includes(materia.curso));
     } else {
-      // Se nenhum curso for selecionado, limpar a lista de matérias
       this.materias = [];
     }
   }
+
 
   loadProfessor() {
     this.professorService.getProfessor().subscribe(
@@ -52,32 +51,32 @@ export class ProfessorGerenciarComponent {
       );
   }
 
-  save(){
-    if(this.isEditing)
-    {
-      this.professorService.update(this.formGroupClient.value).subscribe(
-        {
-          next: () => {
-            this.loadProfessor();
-            this.formGroupClient.reset();
-            this.isEditing = false;
-          }
+  save() {
+    if (this.isEditing) {
+      this.professorService.update(this.formGroupClient.value).subscribe({
+        next: () => {
+          this.loadProfessor();
+          this.formGroupClient.reset();
+          this.isEditing = false;
         }
-      )
-    }
-    else {
-      this.professorService.save(this.formGroupClient.value).subscribe({
+      });
+    } else {
+      const formValues = this.formGroupClient.value;
+      // Converter as strings para arrays antes de salvar
+      formValues.course = Array.isArray(formValues.course) ? formValues.course : [formValues.course];
+      formValues.materia = Array.isArray(formValues.materia) ? formValues.materia : [formValues.materia];
+
+      this.professorService.save(formValues).subscribe({
         next: data => {
           this.professor.push(data);
           this.formGroupClient.reset();
           this.formGroupClient.get('course')?.setValue('');
           this.formGroupClient.get('materia')?.setValue('');
           this.onChangeCurso();
-            }
         }
-        );
+      });
     }
- }
+  }
 
   clean(){
     this.formGroupClient.reset();

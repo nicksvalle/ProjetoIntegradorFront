@@ -23,6 +23,19 @@
       "course": "DS",
       "date": "1940-11-09",
       "materia": "BD"
+    },
+    {
+      "id": 4,
+      "name": "1",
+      "email": "1",
+      "course": [
+        "DS",
+        "ADM"
+      ],
+      "date": "1111-10-10",
+      "materia": [
+        "BD"
+      ]
     }
   ]
 }
