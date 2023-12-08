@@ -33,38 +33,42 @@
           <div class="col-6">
             <label for="date" class="form-label">Selecione a data de nascimento</label>
             <input type="date" class="form-control" id="date" formControlName="date" placeholder="Clique para selecionar uma data" #inputCalendar>
-            
+
             <small *ngIf="date.invalid && (date.dirty || date.touched)" class="text-danger">
               <div *ngIf="date.errors?.['required']">Data de nascimento é requirido.</div>
               <div *ngIf="date.errors?.['date']">Data de nascimento tem que ser válido.</div>
             </small>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-6">
             <label for="course" class="form-label">Curso</label>
-            <select id="course" formControlName="course" class="form-select" (change)="onChangeCurso()" multiple>
-              <option value="" selected disabled>Escolha um curso...</option>
-              <option *ngFor="let curso of cursos" [value]="curso">{{ curso }}</option>
+            <select id="course" formControlName="course" class="form-select" multiple>
+                <option value="" selected disabled>Escolha um Curso...</option>
+                <option *ngFor="let course of courses" [value]="course.title">
+                    {{ course.title }}
+                </option>
             </select>
 
             <small *ngIf="course.invalid && (course.dirty || course.touched)" class="text-danger">
-              <div *ngIf="course.errors?.['required']">Curso é requirido.</div>
-              <div *ngIf="course.errors?.['course']">Curso tem que ser válido.</div>
+                <div *ngIf="course.errors?.['required']">Curso é requirido.</div>
+                <div *ngIf="course.errors?.['course']">Curso tem que ser válido.</div>
             </small>
-          </div>
+        </div>
 
-          <div class="col-md-3">
-            <label for="materia" class="form-label">Matéria</label>
-            <select id="materia" formControlName="materia" class="form-select" multiple>
-              <option value="" selected disabled>Selecione uma matéria</option>
-              <option *ngFor="let materia of materias" [value]="materia.sigla">{{ materia.nome }}</option>
+        <div class="col-6">
+            <label for="discipline" class="form-label">Selecione a disciplina</label>
+            <select id="discipline" formControlName="discipline" class="form-select" multiple>
+                <option value="" selected disabled>Escolha uma Disciplina...</option>
+                <option *ngFor="let course of courses" [value]="course.discipline">
+                    {{ course.discipline }}
+                </option>
             </select>
 
-            <small *ngIf="materia.invalid && (materia.dirty || materia.touched)" class="text-danger">
-              <div *ngIf="materia.errors?.['required']">Matéria é requirido.</div>
-              <div *ngIf="materia.errors?.['materia']">Matéria tem que ser válido.</div>
+            <small *ngIf="discipline.invalid && (discipline.dirty || discipline.touched)" class="text-danger">
+                <div *ngIf="discipline.errors?.['required']">Disciplina é requirida.</div>
+                <div *ngIf="discipline.errors?.['discipline']">Disciplina tem que ser válida.</div>
             </small>
-          </div>
+        </div>
 
           <div class="col-12"  style="margin-top: 50px;">
             <button type="submit" class="btn btn-danger me-2" [disabled]="formGroupClient.invalid">Cadastrar</button>
@@ -97,7 +101,7 @@
           <td>{{teacher.email}}</td>
           <td>{{teacher.course}}</td>
           <td>{{teacher.date}}</td>
-          <td>{{teacher.materia}}</td>
+          <td>{{teacher.discipline}}</td>
           <td>
             <button type="button" class="btn btn-dark me-1" (click)="edit(teacher)" >Editar</button>
             <button type="button" class="btn btn-dark" (click)="delete(teacher)">Excluir</button>

@@ -1,11 +1,11 @@
 .logo {
   position: absolute;
   width: 250px; /* Largura desejada */
-  height: 194px; /* Altura desejada */
+  height: 200px; /* Altura desejada */
   left: 71px;
   top: 10px;
   background: url(img/fatec.png);
-  background-size: contain; /* Ajuste o tamanho da imagem para caber no contêiner */
+
   background-repeat: no-repeat; /* Evita que a imagem de fundo se repita */
 }
 

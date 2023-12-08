@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { Teacher } from '../../interfaces/teacher';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { ManageTeacherService } from '../../services/professor/manage-teacher.service';
-import { materias } from '../../materias';
+import { Course } from 'src/app/interfaces/curso';
+import { Teacher } from 'src/app/interfaces/teacher';
+import { ManageCourseService } from 'src/app/services/curso/manage-course.service';
+import { ManageTeacherService } from 'src/app/services/professor/manage-teacher.service';
 
 @Component({
   selector: 'app-manage-teacher',
@@ -13,44 +14,34 @@ export class ManageTeacherComponent {
   teacher: Teacher[] = [];
   isEditing: boolean = false;
   formGroupClient: FormGroup;
-  materias: any[] = [];
-  cursos: string[] = ['DS', 'ADM'];
-  cursosSelecionados: any [] = [];
+  courses: Course[] = [];
 
-  constructor(private manageTeacher: ManageTeacherService, private formBuilder: FormBuilder) {
+  constructor(private manageTeacher: ManageTeacherService, private formBuilder: FormBuilder, private manageCourseService: ManageCourseService) {
     this.formGroupClient = this.formBuilder.group({
       id: [''],
       name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)]],
       email: ['', [Validators.required, Validators.email]],
       course: ['', Validators.required],
       date: ['', Validators.required],
-      materia: ['', Validators.required]
+      discipline: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
-    this.onChangeCurso();
     this.loadTeacher();
+    this.loadCourses();
   }
 
-  onChangeCurso() {
-    const selectedCourses = this.formGroupClient.get('course')?.value;
-    if (selectedCourses && selectedCourses.length > 0) {
-      this.materias = materias.filter(materia => selectedCourses.includes(materia.curso));
-    } else {
-      this.materias = [];
-    }
+  loadCourses() {
+    this.manageCourseService.getCourses().subscribe((courses) => {
+      this.courses = courses;
+    });
   }
 
   loadTeacher() {
     this.manageTeacher.getTeacher().subscribe({
       next: data => {
         this.teacher = data;
-  
-        const selectedCourse = this.formGroupClient.get('course')?.value;
-        if (selectedCourse) {
-          this.materias = materias.filter(materia => materia.curso === selectedCourse);
-        }
       }
     });
   }
@@ -67,16 +58,12 @@ export class ManageTeacherComponent {
       });
     } else {
       const formValues = this.formGroupClient.value;
-      formValues.course = Array.isArray(formValues.course) ? formValues.course : [formValues.course];
-      formValues.materia = Array.isArray(formValues.materia) ? formValues.materia : [formValues.materia];
-
       this.manageTeacher.save(formValues).subscribe({
         next: data => {
           this.teacher.push(data);
           this.formGroupClient.reset();
           this.formGroupClient.get('course')?.setValue('');
-          this.formGroupClient.get('materia')?.setValue('');
-          this.onChangeCurso();
+          this.formGroupClient.get('discipline')?.setValue('');
         }
       });
     }
@@ -85,26 +72,16 @@ export class ManageTeacherComponent {
   clean() {
     this.formGroupClient.reset();
     this.formGroupClient.get('course')?.setValue([]);
-    this.formGroupClient.get('materia')?.setValue([]);
-    this.onChangeCurso();
+    this.formGroupClient.get('discipline')?.setValue([]);
     this.isEditing = false;
   }
 
   edit(teacher: Teacher) {
     console.log('Teacher:', teacher);
-  
+
     this.isEditing = true;
-  
+
     this.formGroupClient.patchValue(teacher);
-  
-    const selectedCourse = this.formGroupClient.get('course')?.value;
-    console.log('Selected Course:', selectedCourse);
-  
-    if (selectedCourse) {
-      const selectedCourseValue = Array.isArray(selectedCourse) ? selectedCourse[0] : selectedCourse;
-      this.materias = materias.filter(materia => materia.curso === selectedCourseValue);
-      console.log('Filtered Materias:', this.materias);
-    }
   }
 
   delete(teacher: Teacher) {
@@ -113,7 +90,7 @@ export class ManageTeacherComponent {
     });
   }
 
-  
+
 
   get name() {
     return this.formGroupClient.controls['name'];
@@ -127,8 +104,8 @@ export class ManageTeacherComponent {
     return this.formGroupClient.controls['date'];
   }
 
-  get materia() {
-    return this.formGroupClient.controls['materia'];
+  get discipline() {
+    return this.formGroupClient.controls['discipline'];
   }
 
   get course() {
