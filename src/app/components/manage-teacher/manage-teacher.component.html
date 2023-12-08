@@ -15,8 +15,8 @@
             <input type="tex" class="form-control" id="name" formControlName="name" placeholder="Digite o nome completo do Professor...">
 
             <small *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
-              <div *ngIf="name.errors?.['required']">Nome é requirido.</div>
-              <div *ngIf="name.errors?.['name']">Nome tem que ser válido.</div>
+              <div *ngIf="name.errors?.['required']">Nome do professor é requirido.</div>
+              <div *ngIf="name.errors?.['name']">Nome do professor tem que ser válido.</div>
             </small>
           </div>
 
