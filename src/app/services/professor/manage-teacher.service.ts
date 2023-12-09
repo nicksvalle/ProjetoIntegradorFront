@@ -11,6 +11,11 @@ export class ManageTeacherService {
 
   constructor(private http: HttpClient) { }
 
+  getTeachers(searchValue: string): Observable<Teacher[]> {
+    const apiUrl = `${this.url}?name=${searchValue}`;
+    return this.http.get<Teacher[]>(apiUrl);
+  }
+
   getTeacher(): Observable<Teacher[]> {
     return this.http.get<Teacher[]>(this.url);
   }

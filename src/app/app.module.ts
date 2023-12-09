@@ -21,6 +21,7 @@ import { ManageTeacherComponent } from './components/manage-teacher/manage-teach
 import { MenuCoordenadorComponent } from './components/menu-coordenador/menu-coordenador.component';
 import { HomeComponent } from './components/home/home.component';
 import { StudentPortalComponent } from './components/student-portal/student-portal.component';
+import { ManageTeacherService } from './services/professor/manage-teacher.service';
 
 
 
@@ -51,7 +52,7 @@ import { StudentPortalComponent } from './components/student-portal/student-port
     ReactiveFormsModule,
     NgMultiSelectDropDownModule
   ],
-  providers: [],
+  providers: [ManageTeacherService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
